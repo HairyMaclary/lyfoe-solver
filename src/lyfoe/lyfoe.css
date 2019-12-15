@@ -1,0 +1,53 @@
+.lyfoe {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonBar {
+    display: flex;
+    flex-direction: row;
+}
+
+.lhs {
+    flex: 1;
+    align-self: center;
+}
+
+.rhs {
+    flex: 1;
+}
+
+.board {
+    display: flex;
+    flex-direction: row;
+}
+
+.badluck {
+    margin-top: 0.5em;;
+    margin-bottom: 0.5em;
+    background-color: rgba(245, 245, 245, 0.219);
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.column {
+    margin: 1em;
+}
+
+.cell {
+    height: 2em;
+    width: 5em;
+    border: 2px solid #555;
+}
+
+
+button {
+    height: 45px;
+    width: 80%;
+    background-color: #777777;
+}
+

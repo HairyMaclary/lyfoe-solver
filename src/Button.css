@@ -1,0 +1,8 @@
+.Button {
+    background-color: blueviolet;
+}
+
+.clicked {
+    transform: scale(8.0);
+    background-color: red;
+}

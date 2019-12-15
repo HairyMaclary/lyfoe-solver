@@ -1,0 +1,344 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Available positions located for all column types 1`] = `
+Array [
+  Object {
+    "color": "blue",
+    "position": Object {
+      "col": 1,
+      "index": 1,
+    },
+  },
+  Object {
+    "color": "grey",
+    "position": Object {
+      "col": 2,
+      "index": 3,
+    },
+  },
+  Object {
+    "color": "green",
+    "position": Object {
+      "col": 3,
+      "index": 2,
+    },
+  },
+  Object {
+    "color": "blue",
+    "position": Object {
+      "col": 4,
+      "index": 0,
+    },
+  },
+]
+`;
+
+exports[`Moving across columns 1`] = `
+Array [
+  Array [
+    "grey",
+    "blue",
+    "green",
+    "blue",
+  ],
+  Array [
+    "green",
+    "blue",
+    "green",
+    "blue",
+  ],
+  Array [
+    "grey",
+    "grey",
+    "blue",
+    "blue",
+  ],
+  Array [
+    "grey",
+    "grey",
+    "grey",
+    "grey",
+  ],
+  Array [
+    "grey",
+    "grey",
+    "grey",
+    "green",
+  ],
+  Array [
+    "blue",
+    "blue",
+    "green",
+    "blue",
+  ],
+]
+`;
+
+exports[`Possible moves" for all positive scenarios 1`] = `
+Array [
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 0,
+    },
+    "to": Object {
+      "col": 2,
+      "index": 1,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 0,
+    },
+    "to": Object {
+      "col": 3,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 0,
+    },
+    "to": Object {
+      "col": 5,
+      "index": 0,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 1,
+      "index": 0,
+    },
+    "to": Object {
+      "col": 3,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 1,
+      "index": 0,
+    },
+    "to": Object {
+      "col": 4,
+      "index": 2,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 2,
+      "index": 2,
+    },
+    "to": Object {
+      "col": 3,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 2,
+      "index": 2,
+    },
+    "to": Object {
+      "col": 5,
+      "index": 0,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 4,
+      "index": 3,
+    },
+    "to": Object {
+      "col": 3,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 5,
+      "index": 1,
+    },
+    "to": Object {
+      "col": 2,
+      "index": 1,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 5,
+      "index": 1,
+    },
+    "to": Object {
+      "col": 3,
+      "index": 3,
+    },
+  },
+]
+`;
+
+exports[`The winning path is correct in a simple 4 column case 1`] = `
+Array [
+  Object {
+    "from": Object {
+      "col": 1,
+      "index": 3,
+    },
+    "to": Object {
+      "col": 3,
+      "index": 0,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 3,
+    },
+    "to": Object {
+      "col": 1,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 1,
+      "index": 3,
+    },
+    "to": Object {
+      "col": 0,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 3,
+    },
+    "to": Object {
+      "col": 2,
+      "index": 0,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 1,
+      "index": 2,
+    },
+    "to": Object {
+      "col": 0,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 3,
+    },
+    "to": Object {
+      "col": 3,
+      "index": 1,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 1,
+      "index": 1,
+    },
+    "to": Object {
+      "col": 0,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 3,
+    },
+    "to": Object {
+      "col": 2,
+      "index": 1,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 1,
+      "index": 0,
+    },
+    "to": Object {
+      "col": 0,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 3,
+    },
+    "to": Object {
+      "col": 3,
+      "index": 2,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 2,
+    },
+    "to": Object {
+      "col": 2,
+      "index": 2,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 1,
+    },
+    "to": Object {
+      "col": 3,
+      "index": 3,
+    },
+  },
+  Object {
+    "from": Object {
+      "col": 0,
+      "index": 0,
+    },
+    "to": Object {
+      "col": 2,
+      "index": 3,
+    },
+  },
+]
+`;
+
+exports[`cloning a complete game 1`] = `
+Array [
+  Array [
+    "blue",
+    "blue",
+    "blue",
+    "blue",
+  ],
+  Array [
+    "grey",
+    "grey",
+    "grey",
+    "grey",
+  ],
+  Array [
+    "grey",
+    "grey",
+    "grey",
+    "grey",
+  ],
+  Array [
+    "green",
+    "green",
+    "green",
+    "green",
+  ],
+]
+`;
