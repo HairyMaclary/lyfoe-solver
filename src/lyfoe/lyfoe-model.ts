@@ -4,6 +4,8 @@ import { Color, Move, AvailablePosition, Position, kColLength } from './lyfoe-ty
 import topPostionInColumn from './utils/top-position';
 import cloneColumns from './utils/clone-columns';
 import availablePositions from './utils/available-positions';
+import { isColBlank, isColAllSame } from './utils/column-checks';
+import possibleMoves from './utils/possible-moves';
 
 // const kColLength = 4;
 
@@ -61,29 +63,29 @@ export class LyfoeModel {
         });
     }
 
-    isColAllSame(column: Color[]) {
-        let topColor = column[0];
+    // isColAllSame(column: Color[]) {
+    //     let topColor = column[0];
 
-        for (let i = 1; i < kColLength; i++) {
-            if (column[i] !== topColor) return false
-        }
+    //     for (let i = 1; i < kColLength; i++) {
+    //         if (column[i] !== topColor) return false
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
-    isColBlank(col: Color[]) {
-        return col.every(color => color === 'grey')
-    }
+    // isColBlank(col: Color[]) {
+    //     return col.every(color => color === 'grey')
+    // }
 
     isGameComplete(gameState: Color[][]): boolean {
         // let isGameComplete = true;
         for (let i = 0; i < gameState.length; i++) {
 
             // a blank column should count towards a game win
-            const isColBlank = this.isColBlank(gameState[i]);
-            if (!isColBlank) {
-                const isColAllSame = this.isColAllSame(gameState[i]);
-                if (!isColAllSame) {
+            const _isColBlank = isColBlank(gameState[i]);
+            if (!_isColBlank) {
+                const _isColAllSame = isColAllSame(gameState[i]);
+                if (!_isColAllSame) {
                     // isGameComplete = false;
                     // break;
                     return false;
@@ -127,76 +129,76 @@ export class LyfoeModel {
         return legal;
     }
 
-    // if the top color in a column matches the color that
-    // can be received in another column (available positions)
-    // then this method will generate a possible move 
-    possibleMoves(
-        columns: Color[][],
-        availablePositions: AvailablePosition[]): Move[] {
+    // // if the top color in a column matches the color that
+    // // can be received in another column (available positions)
+    // // then this method will generate a possible move 
+    // possibleMoves(
+    //     columns: Color[][],
+    //     availablePositions: AvailablePosition[]): Move[] {
 
-        const cols = cloneColumns(columns);
+    //     const cols = cloneColumns(columns);
 
-        const moves: Move[] = [];
+    //     const moves: Move[] = [];
 
-        // skip along the top of each col and see if there is
-        // a match in available positions
+    //     // skip along the top of each col and see if there is
+    //     // a match in available positions
 
-        for (
-            let colIndex = 0;
-            colIndex < this.columnsCount;
-            colIndex++
-        ) {
-            const column = cols[colIndex];
-            const topIndex = topPostionInColumn(column);
-            const topColor = column[topIndex];
+    //     for (
+    //         let colIndex = 0;
+    //         colIndex < this.columnsCount;
+    //         colIndex++
+    //     ) {
+    //         const column = cols[colIndex];
+    //         const topIndex = topPostionInColumn(column);
+    //         const topColor = column[topIndex];
 
-            // empty column so nothing to move out
-            if (topColor === 'grey') continue;
+    //         // empty column so nothing to move out
+    //         if (topColor === 'grey') continue;
 
-            // if a column is complete dont let anything move out
-            if(topIndex === 0 && this.isColAllSame(cols[colIndex])) continue;
+    //         // if a column is complete dont let anything move out
+    //         if(topIndex === 0 && this.isColAllSame(cols[colIndex])) continue;
 
-            // have already tested that available positions exist
-            const colorMatchedPossibilities = availablePositions.filter(possible => {
+    //         // have already tested that available positions exist
+    //         const colorMatchedPossibilities = availablePositions.filter(possible => {
                 
-                // no point in moving in place
-                if (colIndex === possible.position.col) return false;
+    //             // no point in moving in place
+    //             if (colIndex === possible.position.col) return false;
 
-                // anything can move to a bottom blank
-                if (possible.color === 'grey') return true;
+    //             // anything can move to a bottom blank
+    //             if (possible.color === 'grey') return true;
 
-                // or else there must be a color match
-                else if (possible.color === topColor) return true;
+    //             // or else there must be a color match
+    //             else if (possible.color === topColor) return true;
 
-                else return false
-            });
+    //             else return false
+    //         });
 
-            if (colorMatchedPossibilities) {
-                colorMatchedPossibilities.forEach(
-                    possible => {
-                        moves.push(
-                            {
-                                from:
-                                {
-                                    col: colIndex,
-                                    index: topIndex
-                                },
-                                to:
-                                {
-                                    col: possible.position.col,
-                                    index: possible.position.index
-                                },
-                            }
-                        )
-                    }
-                )
-            }
-        }
+    //         if (colorMatchedPossibilities) {
+    //             colorMatchedPossibilities.forEach(
+    //                 possible => {
+    //                     moves.push(
+    //                         {
+    //                             from:
+    //                             {
+    //                                 col: colIndex,
+    //                                 index: topIndex
+    //                             },
+    //                             to:
+    //                             {
+    //                                 col: possible.position.col,
+    //                                 index: possible.position.index
+    //                             },
+    //                         }
+    //                     )
+    //                 }
+    //             )
+    //         }
+    //     }
 
-        // change the order of moves if a better move exists.
-        return moves;
-        // return this.reorderMoves(moves);
-    }
+    //     // change the order of moves if a better move exists.
+    //     return moves;
+    //     // return this.reorderMoves(moves);
+    // }
 
     // ignore moves that would create an undo: prevent infinite loops
     isMoveUndo(previousState: Color[][], futureState: Color[][]) {
@@ -255,7 +257,7 @@ export class LyfoeModel {
         const holesToFill = availablePositions(gameState);
 
         // what if there are no holes to fill? Does this break?
-        const moves = this.possibleMoves(gameState, holesToFill);
+        const moves = possibleMoves(gameState, holesToFill);
 
         // no moves available so do nothing
         if (moves.length === 0) return 'NO_MOVES';

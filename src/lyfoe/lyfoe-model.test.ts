@@ -3,6 +3,8 @@ import cloneColumns from "./utils/clone-columns";
 import availablePositions from "./utils/available-positions";
 import topPostionInColumn from "./utils/top-position";
 import { Color, Move } from "./lyfoe-types";
+import { isColAllSame } from "./utils/column-checks";
+import possibleMoves from "./utils/possible-moves";
 
 const simpleGame: Color[][] = [
     ['blue', 'green', 'blue', 'green'],
@@ -96,19 +98,19 @@ describe('Individual columns are complete:', () => {
     const game = new LyfoeModel(testCols);
 
     test('if all cells are blank', () => {
-        expect(game.isColAllSame(testCols[1])).toBe(true);
+        expect(isColAllSame(testCols[1])).toBe(true);
     })
 
     test('if all cells are the same color', () => {
-        expect(game.isColAllSame(testCols[0])).toBe(true);
+        expect(isColAllSame(testCols[0])).toBe(true);
     })
 
     test('not if cells are mixed colors', () => {
-        expect(game.isColAllSame(testCols[2])).toBe(false);
+        expect(isColAllSame(testCols[2])).toBe(false);
     })
 
     test('not if cells include a blank', () => {
-        expect(game.isColAllSame(testCols[3])).toBe(false);
+        expect(isColAllSame(testCols[3])).toBe(false);
     })
 });
 
@@ -260,8 +262,8 @@ describe('Possible moves"', () => {
 
         const game = new LyfoeModel(testCols);
         const availablePostions = availablePositions(game.columns);
-        const possibleMoves = game.possibleMoves(game.columns, availablePostions);
-        expect(possibleMoves).toMatchSnapshot();
+        const _possibleMoves = possibleMoves(game.columns, availablePostions);
+        expect(_possibleMoves).toMatchSnapshot();
     });
 
     test('may not exist', () => {
@@ -273,8 +275,8 @@ describe('Possible moves"', () => {
 
         const game = new LyfoeModel(testCols);
         const availablePostions = availablePositions(game.columns);
-        const possibleMoves = game.possibleMoves(game.columns, availablePostions);
-        expect(possibleMoves).toMatchObject([]);
+        const _possibleMoves = possibleMoves(game.columns, availablePostions);
+        expect(_possibleMoves).toMatchObject([]);
     });
 });
 
