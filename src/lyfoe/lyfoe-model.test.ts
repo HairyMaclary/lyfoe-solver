@@ -1,7 +1,8 @@
-import { LyfoeModel, Color, Move, kGameWon } from "./lyfoe-model"
+import { LyfoeModel, kGameWon } from "./lyfoe-model"
 import cloneColumns from "./utils/clone-columns";
 import availablePositions from "./utils/available-positions";
 import topPostionInColumn from "./utils/top-position";
+import { Color, Move } from "./lyfoe-types";
 
 const simpleGame: Color[][] = [
     ['blue', 'green', 'blue', 'green'],
