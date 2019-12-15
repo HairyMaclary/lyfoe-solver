@@ -1,24 +1,8 @@
 import { observable, action } from 'mobx';
 import { cloneMoves } from './play-back-model';
+import { Color, Move, AvailablePosition, Position, kColLength } from './lyfoe-types';
 
-export type Color = 'grey' | 'blue' | 'green' | 'pink' | 'yellow';
-
-export interface Position {
-    col: number,
-    index: number
-}
-
-export interface AvailablePosition {
-    position: Position,
-    color: Color
-}
-
-export interface Move {
-    from: Position,
-    to: Position
-}
-
-const kColLength = 4;
+// const kColLength = 4;
 
 export const kGameWon = 'GAME_SOLVED';
 

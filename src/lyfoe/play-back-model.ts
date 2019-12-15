@@ -1,4 +1,4 @@
-import { Move } from "./lyfoe-model";
+import { Move } from "./lyfoe-types";
 
 export interface IPlayBack {
     moves: Move[];

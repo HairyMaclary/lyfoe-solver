@@ -1,9 +1,10 @@
 import React from 'react'
-import { LyfoeModel, Color, Move, kGameWon } from './lyfoe-model';
+import { LyfoeModel, kGameWon } from './lyfoe-model';
 import { observer } from 'mobx-react';
 import './lyfoe.css';
 import { PlayBack, IPlayBack } from './play-back-model';
 import { observable, action } from 'mobx';
+import { Move, Color } from './lyfoe-types';
 
 
 @observer
