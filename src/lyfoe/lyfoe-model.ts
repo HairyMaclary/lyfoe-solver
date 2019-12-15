@@ -198,61 +198,6 @@ export class LyfoeModel {
         // return this.reorderMoves(moves);
     }
 
-    /**
-     *  Which column is is it preferable to move to?
-     * 
-     *  eg, if a later column exists that already has mutiple colors of the correct type then prefer it over a blank column.
-     *   (Only reording and not deleting. Don't want to miss anything).
-     * @param moves 
-     */
-    reorderMoves(moves: Move[], cols: Color[][]) {
-        const _moves = cloneMoves(moves);
-
-        // for each move see if there are any moves with the same to location
-
-        _moves.sort( 
-            (a, b) => {
-                // first check they are the same 'from'
-                if (a.from.col === b.from.col) {
-                    if(a.from.index === b.from.index) {
-     
-                        const aPriority = this.priority(a.to, cols);
-                        const bPriority = this.priority(b.to, cols);
-
-                        return bPriority - aPriority;
-                    } else return 0;
-                } else return 0;
-            }
-        );
-        return _moves;
-    }
-
-    // TODO: finish making test for this and then see if it works. May want to generate a moves array from the standard case at the point it sends something to a blank column rather than completing a column. Log it stingified maybe?
-
-    // xtest('gives priority to 3 match column', ()
-
-    /**
-     * Priority based on the number of color matches below the insertion point. All colors must be the same.
-     * @param to 
-     * @param cols 
-     */
-    priority(to: Position, cols: Color[][]) {
-        // the index below the inerstion point
-
-        let index = to.index + 1; 
-        let colorMatchCount = 0;
-        let inComingColor = cols[to.col][to.index];  
-            while(index < 4) {
-                if(inComingColor === cols[to.col][index]) {
-                    colorMatchCount++;
-                    index++;
-                } else return 0; // if not all the same color
-            }
-
-        return colorMatchCount;
-    }
-
-
     // ignore moves that would create an undo: prevent infinite loops
     isMoveUndo(previousState: Color[][], futureState: Color[][]) {
         const prev = JSON.stringify(previousState);
