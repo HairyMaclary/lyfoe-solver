@@ -2,6 +2,8 @@ import { observable, action } from 'mobx';
 import { cloneMoves } from './play-back-model';
 import { Color, Move, AvailablePosition, Position, kColLength } from './lyfoe-types';
 import topPostionInColumn from './utils/top-position';
+import cloneColumns from './utils/clone-columns';
+import availablePositions from './utils/available-positions';
 
 // const kColLength = 4;
 
@@ -125,54 +127,6 @@ export class LyfoeModel {
         return legal;
     }
 
-    cloneColumns(columns: Color[][]): Color[][] {
-        return JSON.parse(JSON.stringify(columns));
-    }
-
-    // determines what color can go into each column
-    availablePositions(columns: Color[][]) {
-
-        const cols = this.cloneColumns(columns);
-
-        let availablePositions: AvailablePosition[] = [];
-
-        // iterate through each column
-        for (let colIndex = 0; colIndex < this.columnsCount; colIndex++) {
-            const column = cols[colIndex];
-
-            // iterate through each cell in a column
-            for (let i = 0; i < kColLength; i++) {
-
-                // empty column: bottom cell is blank
-                if (i === 3 && column[i] === 'grey') {
-                    availablePositions.push(
-                        {
-                            position: {
-                                col: colIndex,
-                                index: i
-                            },
-                            color: 'grey'  // indicates any
-                        }
-                    )
-                } else if (
-                    i < 3 && column[i] === 'grey' && column[i + 1] !== 'grey'
-                ) {
-                    availablePositions.push(
-                        {
-                            position: {
-                                col: colIndex,
-                                index: i
-                            },
-                            color: column[i + 1]
-                        }
-                    )
-                }
-            }
-        }
-
-        return availablePositions;
-    }
-
     // if the top color in a column matches the color that
     // can be received in another column (available positions)
     // then this method will generate a possible move 
@@ -180,7 +134,7 @@ export class LyfoeModel {
         columns: Color[][],
         availablePositions: AvailablePosition[]): Move[] {
 
-        const cols = this.cloneColumns(columns);
+        const cols = cloneColumns(columns);
 
         const moves: Move[] = [];
 
@@ -317,7 +271,7 @@ export class LyfoeModel {
     }
 
     move( move: Move, columns: Color[][]): Color[][] {
-        const cols = this.cloneColumns(columns);
+        const cols = cloneColumns(columns);
         const colorToMove = cols[move.from.col][move.from.index];
         cols[move.from.col][move.from.index] = 'grey';
         cols[move.to.col][move.to.index] = colorToMove;
@@ -353,7 +307,7 @@ export class LyfoeModel {
             this.iterationCount++;
         }
 
-        const holesToFill = this.availablePositions(gameState);
+        const holesToFill = availablePositions(gameState);
 
         // what if there are no holes to fill? Does this break?
         const moves = this.possibleMoves(gameState, holesToFill);

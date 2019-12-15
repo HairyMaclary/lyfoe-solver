@@ -1,4 +1,7 @@
 import { LyfoeModel, Color, Move, kGameWon } from "./lyfoe-model"
+import cloneColumns from "./utils/clone-columns";
+import availablePositions from "./utils/available-positions";
+import topPostionInColumn from "./utils/top-position";
 
 const simpleGame: Color[][] = [
     ['blue', 'green', 'blue', 'green'],
@@ -178,7 +181,7 @@ describe('cloning', () => {
             ];
 
         const game = new LyfoeModel(testCols);
-        const cloned = game.cloneColumns(game.columns);
+        const cloned = cloneColumns(game.columns);
 
         expect(cloned).toMatchSnapshot();
         expect(cloned).not.toBe(game.columns);
@@ -199,7 +202,7 @@ describe('Available positions', () => {
         ];
 
         const game = new LyfoeModel(testCols);
-        const availablePostions = game.availablePositions(game.columns);
+        const availablePostions = availablePositions(game.columns);
         expect(availablePostions).toMatchSnapshot();
     })
 });
@@ -218,27 +221,27 @@ describe('Top position in column', () => {
 
     test('none blank', () => {
         const column = game.columns[0];
-        expect(game.topPostionInColumn(column)).toBe(0);
+        expect(topPostionInColumn(column)).toBe(0);
     })
 
     test('top blank', () => {
         const column = game.columns[1];
-        expect(game.topPostionInColumn(column)).toBe(1);
+        expect(topPostionInColumn(column)).toBe(1);
     })
 
     test('two blank', () => {
         const column = game.columns[2];
-        expect(game.topPostionInColumn(column)).toBe(2);
+        expect(topPostionInColumn(column)).toBe(2);
     })
 
     test('three blank', () => {
         const column = game.columns[3];
-        expect(game.topPostionInColumn(column)).toBe(3);
+        expect(topPostionInColumn(column)).toBe(3);
     })
 
     test('all blank', () => {
         const column = game.columns[4];
-        expect(game.topPostionInColumn(column)).toBe(3);
+        expect(topPostionInColumn(column)).toBe(3);
     })
 
 });
@@ -255,7 +258,7 @@ describe('Possible moves"', () => {
         ];
 
         const game = new LyfoeModel(testCols);
-        const availablePostions = game.availablePositions(game.columns);
+        const availablePostions = availablePositions(game.columns);
         const possibleMoves = game.possibleMoves(game.columns, availablePostions);
         expect(possibleMoves).toMatchSnapshot();
     });
@@ -268,7 +271,7 @@ describe('Possible moves"', () => {
         ];
 
         const game = new LyfoeModel(testCols);
-        const availablePostions = game.availablePositions(game.columns);
+        const availablePostions = availablePositions(game.columns);
         const possibleMoves = game.possibleMoves(game.columns, availablePostions);
         expect(possibleMoves).toMatchObject([]);
     });
@@ -467,9 +470,13 @@ describe('The winning path is correct', () => {
 describe('Priority move system', () => {
 
     xtest('gives priority to 3 match column', () => {
+
+        // we want the green to go to the last column, not the second column
         const testCols: Color[][] = [
+            ["grey", "grey", "grey", "green"],
+            ["grey", "grey", "grey", "grey"],
             ["blue", "blue", "blue", "blue"],
-            ["grey", "grey", "grey", "grey"]
+            ["grey", "green", "green", "green"]
         ];
 
         const game = new LyfoeModel(testCols);
@@ -478,7 +485,7 @@ describe('Priority move system', () => {
         const result = game.startNew();
         expect(result).toBe(kGameWon);
         expect(game.gameWon).toBe(true);
-        expect(game.winningPath.length).toBe(0);
+        expect(game.columns).toMatchSnapshot();
     });
 });
 
