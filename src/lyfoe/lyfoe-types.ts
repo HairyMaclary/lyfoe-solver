@@ -15,4 +15,6 @@ export interface Move {
     to: Position
 }
 
+export type history = string[];
+
 export const kColLength = 4;

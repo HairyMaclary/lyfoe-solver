@@ -5,6 +5,7 @@ import './lyfoe.css';
 import { PlayBack, IPlayBack } from './play-back-model';
 import { observable, action } from 'mobx';
 import { Move, Color } from './lyfoe-types';
+import { move as _move} from './utils/moves';
 
 
 @observer
@@ -45,7 +46,7 @@ export class Lyfoe extends React.Component {
 
     @action
     move(move: Move) {
-        this.colState = this.game.move(move, this.colState);
+        this.colState = _move(move, this.colState);
     }
 
     disableCheck() {

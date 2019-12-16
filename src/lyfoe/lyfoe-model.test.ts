@@ -3,8 +3,12 @@ import cloneColumns from "./utils/clone-columns";
 import availablePositions from "./utils/available-positions";
 import topPostionInColumn from "./utils/top-position";
 import { Color, Move } from "./lyfoe-types";
-import { isColAllSame } from "./utils/column-checks";
+import { isColAllSame, isColumnLegal } from "./utils/column-checks";
 import possibleMoves from "./utils/possible-moves";
+import { isMoveUndo, move } from "./utils/moves";
+
+// mocking this affects other tests. Will have to consider moving this out into another test suite. This file is more integration test like.
+//jest.mock('./utils/column-checks');
 
 const simpleGame: Color[][] = [
     ['blue', 'green', 'blue', 'green'],
@@ -20,67 +24,55 @@ const game = new LyfoeModel(simpleGame);
 describe('illegal column checks:', () => {
 
     test('A column with no greys is legal', () => {
-        const legal = game.isColumnLegal(simpleGame[0]);
+        const legal = isColumnLegal(simpleGame[0]);
         expect(legal).toBe(true);
     })
 
     test('A mixed column is legal', () => {
-        const legal = game.isColumnLegal(simpleGame[4]);
+        const legal = isColumnLegal(simpleGame[4]);
         expect(legal).toBe(true);
     })
 
     test('An empty column is legal', () => {
-        const legal = game.isColumnLegal(simpleGame[2]);
+        const legal = isColumnLegal(simpleGame[2]);
         expect(legal).toBe(true);
     })
 
     test('A column with an empty string is illegal', () => {
-        const legal = game.isColumnLegal(simpleGame[2]);
+        const legal = isColumnLegal(simpleGame[2]);
         expect(legal).toBe(true);
     })
 
     test('A column with other than 4 entries is illegal', () => {
-        let spy1 = jest.spyOn(game, 'isColumnLegal');
-        let spy2 = jest.spyOn(game, 'setColumn');
+
+        const setColumnSpy = jest.spyOn(game, 'setColumn');
 
         expect(() => game.setColumn(4, ['grey'])).toThrowError();
-        expect(spy1).toHaveBeenCalled();
-        expect(spy2).toHaveBeenCalled();
+        // expect(isColumnLegal).toHaveBeenCalled();
+        expect(setColumnSpy).toHaveBeenCalled();
 
-        spy1.mockReset();
-        spy1.mockRestore();
-        spy2.mockReset();
-        spy2.mockRestore();
+        setColumnSpy.mockReset();
+        setColumnSpy.mockRestore();
     })
 
     test('A column with a grey below a color is illegal', () => {
-        let spy1 = jest.spyOn(game, 'isColumnLegal');
-        let spy2 = jest.spyOn(game, 'setColumn');
+        const setColumnSpy = jest.spyOn(game, 'setColumn');
 
         expect(() => game.setColumn(4, ['blue', 'grey', 'grey', 'grey'])).toThrowError();
-        expect(() => game.setColumn(4, ['grey'])).toThrowError();
-        expect(spy1).toHaveBeenCalled();
-        expect(spy2).toHaveBeenCalled();
+        expect(setColumnSpy).toHaveBeenCalled();
 
-        spy1.mockReset();
-        spy1.mockRestore();
-        spy2.mockReset();
-        spy2.mockRestore();
+        setColumnSpy.mockReset();
+        setColumnSpy.mockRestore();
     })
 
     test('A column with a non string element is illegal', () => {
-        let spy1 = jest.spyOn(game, 'isColumnLegal');
-        let spy2 = jest.spyOn(game, 'setColumn');
+        const setColumnSpy = jest.spyOn(game, 'setColumn');
 
         expect(() => game.setColumn(4, [(true as any as Color), 'grey', 'grey', 'grey'])).toThrowError();
-        expect(() => game.setColumn(4, ['grey'])).toThrowError();
-        expect(spy1).toHaveBeenCalled();
-        expect(spy2).toHaveBeenCalled();
+        expect(setColumnSpy).toHaveBeenCalled();
 
-        spy1.mockReset();
-        spy1.mockRestore();
-        spy2.mockReset();
-        spy2.mockRestore();
+        setColumnSpy.mockReset();
+        setColumnSpy.mockRestore();
     })
 })
 
@@ -150,7 +142,7 @@ describe('The game is complete:', () => {
             ["grey", "grey", "grey", "grey"]
         ];
 
-        const game = new LyfoeModel( testCols);
+        const game = new LyfoeModel(testCols);
         const isComplete = game.isGameComplete(testCols);
         expect(isComplete).toBe(false);
     })
@@ -292,8 +284,8 @@ describe('Check move is an undo:', () => {
         ];
 
         const game = new LyfoeModel(testCols);
-        const isMoveUndo = game.isMoveUndo(testCols, testCols);
-        expect(isMoveUndo).toBe(true);
+        const _isMoveUndo = isMoveUndo(testCols, testCols);
+        expect(_isMoveUndo).toBe(true);
     });
 
     test('true negative', () => {
@@ -316,8 +308,8 @@ describe('Check move is an undo:', () => {
         ];
 
         const game = new LyfoeModel(testCols1);
-        const isMoveUndo = game.isMoveUndo(testCols1, testCols2);
-        expect(isMoveUndo).toBe(false);
+        const _isMoveUndo = isMoveUndo(testCols1, testCols2);
+        expect(_isMoveUndo).toBe(false);
     });
 });
 
@@ -344,7 +336,7 @@ describe('Moving', () => {
         }
 
         const game = new LyfoeModel(testCols);
-        expect(game.move(nextMove, testCols)).toMatchSnapshot();
+        expect(move(nextMove, testCols)).toMatchSnapshot();
     });
 });
 
@@ -364,7 +356,7 @@ describe('undo moves', () => {
         ];
 
         const game = new LyfoeModel(firstState);
-        expect(game.isMoveUndo(firstState, secondState)).toBe(true);
+        expect(isMoveUndo(firstState, secondState)).toBe(true);
     });
 
     test('are not detected when appropriate', () => {
@@ -382,7 +374,7 @@ describe('undo moves', () => {
         ];
 
         const game = new LyfoeModel(firstState);
-        expect(game.isMoveUndo(firstState, secondState)).toBe(false);
+        expect(isMoveUndo(firstState, secondState)).toBe(false);
     });
 });
 
