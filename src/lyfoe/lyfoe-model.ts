@@ -61,20 +61,6 @@ export class LyfoeModel {
         });
     }
 
-    // isColAllSame(column: Color[]) {
-    //     let topColor = column[0];
-
-    //     for (let i = 1; i < kColLength; i++) {
-    //         if (column[i] !== topColor) return false
-    //     }
-
-    //     return true;
-    // }
-
-    // isColBlank(col: Color[]) {
-    //     return col.every(color => color === 'grey')
-    // }
-
     isGameComplete(gameState: Color[][]): boolean {
         // let isGameComplete = true;
         for (let i = 0; i < gameState.length; i++) {
@@ -93,40 +79,6 @@ export class LyfoeModel {
         return true;
     }
 
-    // /**
-    //  * Columns should not have a blank below a color
-    //  */
-    // isColumnLegal(col: Color[]) {
-    //     let legal = true;
-
-    //     if (col.length !== kColLength) {
-    //         legal = false;
-    //         throw new Error('incorrect col length');
-    //     }
-
-    //     let isNonBlankHit = false;
-
-    //     col.forEach(color => {
-    //         if (color !== 'grey') {
-    //             isNonBlankHit = true;
-
-    //             if (typeof color !== 'string') {
-    //                 legal = false;
-    //                 throw new Error('array element not of type string')
-    //             }
-
-    //             // we have a blank. It should not be below non-blank
-    //         } else {
-    //             if (isNonBlankHit) {
-    //                 legal = false;
-    //                 throw new Error('Blank under a color');
-    //             }
-    //         }
-    //     });
-
-    //     return legal;
-    // }
-
     isMoveRepeat(move: Move, state: Color[][]) {
         const snapshot = JSON.stringify({move, state});
         if(this.history.includes(snapshot) ) {
@@ -136,21 +88,6 @@ export class LyfoeModel {
             return false;
         };
     }
-
-    // move( move: Move, columns: Color[][]): Color[][] {
-    //     const cols = cloneColumns(columns);
-    //     const colorToMove = cols[move.from.col][move.from.index];
-    //     cols[move.from.col][move.from.index] = 'grey';
-    //     cols[move.to.col][move.to.index] = colorToMove;
-
-    //     const fromColLegal =  this.isColumnLegal(cols[move.from.col]);
-    //     const toColLegal =  this.isColumnLegal(cols[move.to.col]);
-  
-    //     if(!fromColLegal || !toColLegal) {
-    //         throw new Error('A move has made an illegal state');
-    //     }
-    //     return cols;
-    // }
 
     startNew() {
         // check to see that the game is already won
