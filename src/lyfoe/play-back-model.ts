@@ -1,14 +1,11 @@
 import { Move } from "./lyfoe-types";
+import { cloneMoves } from "./utils/moves";
 
 export interface IPlayBack {
     moves: Move[];
     currentIndex: number;
     nextMove: () => Move;
     previousMove: () => Move;
-}
-
-export function cloneMoves(moves: Move[]): Move[] {
-    return JSON.parse(JSON.stringify(moves));
 }
 
 export class PlayBack implements IPlayBack {

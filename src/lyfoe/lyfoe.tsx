@@ -13,16 +13,25 @@ export class Lyfoe extends React.Component {
 
     @observable
     colState: Color[][] = [
-        ['blue', 'green', 'blue', 'green'],
-        ['blue', 'green', 'blue', 'green'],
+        
+        ['yellow', 'blue', 'yellow', 'red'],
+        ['blue', 'blue', 'red', 'red'],
+        ['yellow', 'yellow', 'red', 'blue'],
         ['grey', 'grey', 'grey', 'grey'],
         ['grey', 'grey', 'grey', 'grey'],
-        ['grey', 'pink', 'pink', 'pink'],
-        ['grey', 'grey', 'grey', 'pink'],
-        // ['pink', 'yellow', 'pink', 'yellow'],
-        // ['pink', 'yellow', 'pink', 'yellow'],
+        
+        // ['blue', 'green', 'blue', 'green'],
+        // ['blue', 'green', 'blue', 'green'],
         // ['grey', 'grey', 'grey', 'grey'],
-        // ['grey', 'grey', 'grey', 'grey']
+        // ['grey', 'grey', 'grey', 'grey'],
+        // ['grey', 'pink', 'pink', 'pink'],
+        // ['grey', 'grey', 'grey', 'pink'],
+
+
+        // ["grey", "grey", "grey", "green"],
+        // ["grey", "grey", "grey", "grey"],
+        // ["blue", "blue", "blue", "blue"],
+        // ["grey", "green", "green", "green"]
     ];
 
     columnCount = this.colState.length;

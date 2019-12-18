@@ -4,8 +4,7 @@ import availablePositions from './utils/available-positions';
 import { isColBlank, isColAllSame, isColumnLegal } from './utils/column-checks';
 import possibleMoves from './utils/possible-moves';
 import { isMoveUndo, move } from './utils/moves';
-
-// const kColLength = 4;
+import reorderMoves from './utils/order-priority';
 
 export const kGameWon = 'GAME_SOLVED';
 
@@ -44,7 +43,6 @@ export class LyfoeModel {
             const errMsg = `Illegal Col. Index: ${index}. ` + e.message;
             throw new Error(errMsg);
         }
-
     }
 
     private isColsCountCorrect(cols: Color[][]) {
@@ -55,7 +53,6 @@ export class LyfoeModel {
 
     setAllColumns(newCols: Color[][]) {
         this.isColsCountCorrect(newCols);
-
         newCols.forEach((newCol, index) => {
             this.setColumn(index, newCol)
         });
@@ -114,10 +111,14 @@ export class LyfoeModel {
         const holesToFill = availablePositions(gameState);
 
         // what if there are no holes to fill? Does this break?
-        const moves = possibleMoves(gameState, holesToFill);
+        let moves = possibleMoves(gameState, holesToFill);
 
+        
         // no moves available so do nothing
         if (moves.length === 0) return 'NO_MOVES';
+        
+        // reorder the moves base on a priority system
+        moves = reorderMoves(moves, gameState);
 
         for (let i = 0; i < moves.length; i++) {
 

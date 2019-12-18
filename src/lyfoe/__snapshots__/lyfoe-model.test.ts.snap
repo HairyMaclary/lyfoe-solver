@@ -179,6 +179,35 @@ Array [
 ]
 `;
 
+exports[`Priority move system the games gives priority to 3 match column 1`] = `
+Array [
+  Array [
+    "grey",
+    "grey",
+    "grey",
+    "green",
+  ],
+  Array [
+    "grey",
+    "grey",
+    "grey",
+    "grey",
+  ],
+  Array [
+    "blue",
+    "blue",
+    "blue",
+    "blue",
+  ],
+  Array [
+    "grey",
+    "green",
+    "green",
+    "green",
+  ],
+]
+`;
+
 exports[`The winning path is correct in a simple 4 column case 1`] = `
 Array [
   Object {
@@ -193,28 +222,8 @@ Array [
   },
   Object {
     "from": Object {
-      "col": 0,
-      "index": 3,
-    },
-    "to": Object {
       "col": 1,
-      "index": 3,
-    },
-  },
-  Object {
-    "from": Object {
-      "col": 1,
-      "index": 3,
-    },
-    "to": Object {
-      "col": 0,
-      "index": 3,
-    },
-  },
-  Object {
-    "from": Object {
-      "col": 0,
-      "index": 3,
+      "index": 2,
     },
     "to": Object {
       "col": 2,
@@ -224,17 +233,7 @@ Array [
   Object {
     "from": Object {
       "col": 1,
-      "index": 2,
-    },
-    "to": Object {
-      "col": 0,
-      "index": 3,
-    },
-  },
-  Object {
-    "from": Object {
-      "col": 0,
-      "index": 3,
+      "index": 1,
     },
     "to": Object {
       "col": 3,
@@ -244,31 +243,11 @@ Array [
   Object {
     "from": Object {
       "col": 1,
-      "index": 1,
-    },
-    "to": Object {
-      "col": 0,
-      "index": 3,
-    },
-  },
-  Object {
-    "from": Object {
-      "col": 0,
-      "index": 3,
+      "index": 0,
     },
     "to": Object {
       "col": 2,
       "index": 1,
-    },
-  },
-  Object {
-    "from": Object {
-      "col": 1,
-      "index": 0,
-    },
-    "to": Object {
-      "col": 0,
-      "index": 3,
     },
   },
   Object {

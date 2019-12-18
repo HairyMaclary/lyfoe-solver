@@ -2,6 +2,10 @@ import { Color, Move } from "../lyfoe-types";
 import cloneColumns from "./clone-columns";
 import { isColumnLegal } from "./column-checks";
 
+export function cloneMoves(moves: Move[]): Move[] {
+    return JSON.parse(JSON.stringify(moves));
+}
+
 // ignore moves that would create an undo: prevent infinite loops
 export function isMoveUndo(previousState: Color[][], futureState: Color[][]) {
     const prev = JSON.stringify(previousState);

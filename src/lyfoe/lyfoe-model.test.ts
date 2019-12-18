@@ -6,6 +6,7 @@ import { Color, Move } from "./lyfoe-types";
 import { isColAllSame, isColumnLegal } from "./utils/column-checks";
 import possibleMoves from "./utils/possible-moves";
 import { isMoveUndo, move } from "./utils/moves";
+import reorderMoves from "./utils/order-priority";
 
 // mocking this affects other tests. Will have to consider moving this out into another test suite. This file is more integration test like.
 //jest.mock('./utils/column-checks');
@@ -464,7 +465,72 @@ describe('The winning path is correct', () => {
 
 describe('Priority move system', () => {
 
-    xtest('gives priority to 3 match column', () => {
+    test('reorderPriority function perfers a 3 match column over a blank column', () => {
+
+        // we want the green to go to the last column, not the second column. The first two moves should be swaped
+
+        const testCols: Color[][] = [
+            ["grey", "grey", "grey", "green"],
+            ["grey", "grey", "grey", "grey"],
+            ["blue", "blue", "blue", "blue"],
+            ["grey", "green", "green", "green"]
+        ];
+
+        const moves = [
+            {
+                "from": { "col": 0, "index": 3 },
+                "to": { "col": 1, "index": 3 }
+            },
+            {
+                "from": { "col": 0, "index": 3 }, "to": { "col": 3, "index": 0 }
+            },
+            {
+                "from": { "col": 3, "index": 1 }, "to": { "col": 0, "index": 2 }
+            },
+            {
+                "from": { "col": 3, "index": 1 }, "to": { "col": 1, "index": 3 }
+            }
+        ]
+
+        const reorderedMoves = reorderMoves(moves, testCols);
+
+        expect(reorderedMoves).toMatchObject(
+            [
+                {
+                    "from": { "col": 0, "index": 3 }, "to": { "col": 3, "index": 0 }
+                },
+                {
+                    "from": { "col": 0, "index": 3 },
+                    "to": { "col": 1, "index": 3 }
+                },
+                {
+                    "from": { "col": 3, "index": 1 }, "to": { "col": 0, "index": 2 }
+                },
+                {
+                    "from": { "col": 3, "index": 1 }, "to": { "col": 1, "index": 3 }
+                }
+            ]
+        );
+    });
+
+    xtest('the game perfers a 2 match column over a blank column', () => {
+
+        // we want the green to go to the last column, not the second column
+        const testCols: Color[][] = [
+            ["grey", "grey", "grey", "green"],
+            ["grey", "grey", "grey", "grey"],
+            ["blue", "blue", "blue", "blue"],
+            ["grey", "grey", "green", "green"]
+        ];
+
+        const game = new LyfoeModel(testCols);
+
+        const result = game.startNew();
+        expect(game.columns).toMatchSnapshot();
+    });
+
+
+    test('the games gives priority to 3 match column', () => {
 
         // we want the green to go to the last column, not the second column
         const testCols: Color[][] = [
