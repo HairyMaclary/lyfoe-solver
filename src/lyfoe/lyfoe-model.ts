@@ -24,7 +24,7 @@ export class LyfoeModel {
     history: history = []; // all previous move/state combos
 
     //debugging: limit memory usuage by capping solve calls
-    maxIteration = 50;
+    maxIteration = 5000;
     iterationCount = 0;
 
     constructor(

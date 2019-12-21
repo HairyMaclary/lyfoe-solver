@@ -208,6 +208,35 @@ Array [
 ]
 `;
 
+exports[`Priority move system the games gives priority to moving to a column with 3 matchin colors 1`] = `
+Array [
+  Array [
+    "grey",
+    "grey",
+    "grey",
+    "green",
+  ],
+  Array [
+    "grey",
+    "grey",
+    "grey",
+    "grey",
+  ],
+  Array [
+    "blue",
+    "blue",
+    "blue",
+    "blue",
+  ],
+  Array [
+    "grey",
+    "green",
+    "green",
+    "green",
+  ],
+]
+`;
+
 exports[`The winning path is correct in a simple 4 column case 1`] = `
 Array [
   Object {

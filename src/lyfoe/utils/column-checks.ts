@@ -1,9 +1,9 @@
 import { Color, kColLength } from "../lyfoe-types";
 
-export function isColAllSame(column: Color[]) {
-    let topColor = column[0];
+export function isColAllSame(column: Color[], firstIndex = 0) {
+    let topColor = column[firstIndex];
 
-    for (let i = 1; i < kColLength; i++) {
+    for (let i = firstIndex + 1; i < kColLength; i++) {
         if (column[i] !== topColor) return false
     }
 

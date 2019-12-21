@@ -1,4 +1,4 @@
-export type Color = 'grey' | 'blue' | 'green' | 'pink' | 'yellow' | 'red';
+export type Color = 'grey' | 'blue' | 'green' | 'pink' | 'yellow' | 'red' | 'lightgreen' | 'darkgreen' | 'lightblue' | 'purple' | 'orange' | 'lightpink' | 'black' | 'white' | 'darkgrey' | 'aqua';
 
 export interface Position {
     col: number,

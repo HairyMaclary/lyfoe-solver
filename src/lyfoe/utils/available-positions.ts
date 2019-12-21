@@ -3,7 +3,6 @@ import { Color, AvailablePosition, kColLength } from "../lyfoe-types";
 
 // determines what color can go into each column
 export default function availablePositions(columns: Color[][]) {
-
     const cols = cloneColumns(columns);
     const columnsCount = cols.length;
 

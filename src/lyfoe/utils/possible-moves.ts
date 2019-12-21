@@ -32,6 +32,9 @@ import { isColAllSame } from "./column-checks";
             // if a column is complete dont let anything move out
             if(topIndex === 0 && isColAllSame(cols[colIndex])) continue;
 
+            //if a column already has 3 matching colors then dont move out
+            if(topIndex === 1 && isColAllSame(cols[colIndex], 1)) continue;
+
             // have already tested that available positions exist
             const colorMatchedPossibilities = availablePositions.filter(possible => {
                 

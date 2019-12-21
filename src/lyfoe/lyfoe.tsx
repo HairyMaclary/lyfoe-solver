@@ -13,12 +13,42 @@ export class Lyfoe extends React.Component {
 
     @observable
     colState: Color[][] = [
-        
-        ['yellow', 'blue', 'yellow', 'red'],
-        ['blue', 'blue', 'red', 'red'],
-        ['yellow', 'yellow', 'red', 'blue'],
+
+        // super hard
+        ['lightgreen', 'pink', 'lightgreen',"lightblue"],
+        ['lightgreen', 'green',"green", 'lightblue'],
+        ['darkgrey', 'blue', 'pink', 'darkgreen'],
+        ['lightblue', 'red', 'orange', 'aqua'],
+        ['blue', 'white', 'purple', 'black'],
+        ['yellow', 'orange', 'blue', 'red'],
+        ['orange', 'aqua', 'white', 'purple'],
+        ['black', 'pink', 'lightpink', 'orange'],
+        ['darkgreen', 'white', 'blue', 'black'],
+        ['pink', 'yellow', 'yellow', 'darkgreen'],
+        ['aqua', 'purple', 'lightpink', 'lightblue'],
+        ['yellow', 'green', 'purple', 'darkgrey'],
+        ['darkgrey', 'aqua', 'darkgrey', 'lightgreen'],
+        ['red', 'lightpink', 'darkgreen', 'black'],
+        ['lightpink', 'green', 'white', 'red'],
         ['grey', 'grey', 'grey', 'grey'],
         ['grey', 'grey', 'grey', 'grey'],
+
+
+        //mid-upper complexity
+        // ['blue', 'red', 'red', 'green'],
+        // ['pink', 'pink', 'yellow', 'red'],
+        // ['yellow', 'blue', 'green', 'blue'],
+        // ['green', 'yellow', 'red', 'yellow'],
+        // ['blue', 'green', 'pink', 'pink'],
+        // ['grey', 'grey', 'grey', 'grey'],
+        // ['grey', 'grey', 'grey', 'grey'],
+
+        // mid level real case
+        // ['yellow', 'blue', 'yellow', 'red'],
+        // ['blue', 'blue', 'red', 'red'],
+        // ['yellow', 'yellow', 'red', 'blue'],
+        // ['grey', 'grey', 'grey', 'grey'],
+        // ['grey', 'grey', 'grey', 'grey'],
         
         // ['blue', 'green', 'blue', 'green'],
         // ['blue', 'green', 'blue', 'green'],
@@ -97,6 +127,7 @@ export class Lyfoe extends React.Component {
     render() {
         return (
             <div className='lyfoe'>
+                <h1>Andrea's Lyfoe Solver</h1>
                 <div className='buttonBar'>
                     <div className='lhs'>
                         <button

@@ -85,7 +85,7 @@ describe('Individual columns are complete:', () => {
         ['blue', 'blue', 'blue', 'blue'],
         ['grey', 'grey', 'grey', 'grey'],
         ['green', 'blue', 'green', 'blue'],
-        ['grey', 'blue', 'blue', 'blue']
+        ['grey', 'blue', 'blue', 'blue'],
     ];
 
     const game = new LyfoeModel(testCols);
@@ -104,6 +104,10 @@ describe('Individual columns are complete:', () => {
 
     test('not if cells include a blank', () => {
         expect(isColAllSame(testCols[3])).toBe(false);
+    })
+
+    test('can test all cells are the same from the second index', () => {
+        expect(isColAllSame(testCols[3], 1)).toBe(true);
     })
 });
 
@@ -530,7 +534,7 @@ describe('Priority move system', () => {
     });
 
 
-    test('the games gives priority to 3 match column', () => {
+    test('the games gives priority to moving to a column with 3 matchin colors', () => {
 
         // we want the green to go to the last column, not the second column
         const testCols: Color[][] = [

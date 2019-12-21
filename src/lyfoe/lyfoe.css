@@ -24,6 +24,7 @@
 .board {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .badluck {
@@ -42,6 +43,13 @@
     height: 2em;
     width: 5em;
     border: 2px solid #555;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 50%
 }
 
 
