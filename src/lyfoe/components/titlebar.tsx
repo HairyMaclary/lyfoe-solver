@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function() {
     return (
-        <div className={'titleBar'}>
+        <div className={'topBar'}>
             <div className={'title'}>
                 Andrea's Lyfoe Solver
             </div>
