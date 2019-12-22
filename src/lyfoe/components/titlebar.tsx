@@ -6,7 +6,7 @@ export default function() {
             <div className={'title'}>
                 Andrea's Lyfoe Solver
             </div>
-            <div className={'control bar'}></div>
+            <div className={'controlBar'}></div>
         </div>
     );
 }
